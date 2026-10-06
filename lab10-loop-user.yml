@@ -1,0 +1,16 @@
+---
+- name: create multiple users
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Add team members
+      ansible.builtin.user:
+        name: "{{ item }}"
+        state: present
+        create_home: true
+
+      loop:
+        - devops1
+        - devops2
+        - devops3

@@ -1,0 +1,17 @@
+---
+- name: Handler demo
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Update web page
+      ansible.builtin.copy:
+        content: "Configuration Updated"
+        dest: /var/www/html/index.html
+      notify: Restart web server
+
+  handlers:
+    - name: Restart web server
+      ansible.builtin.service:
+        name: apache2
+        state: restarted

@@ -1,0 +1,12 @@
+---
+- name: write warning banner
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: create warning file
+      ansible.builtin.copy:
+        content: |
+          WARNING: AUTHORIZED ACCESS ONLY
+          ALL ACTIVITY IS MONITORED
+        dest: /etc/motd

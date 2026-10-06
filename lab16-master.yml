@@ -1,0 +1,38 @@
+---
+- name: complete web server deployment
+  hosts: servers
+  become: true
+
+  vars:
+    web_pkg: apache2
+    web_svc: apache2
+    port: 80
+
+  tasks:
+    - name: Install required packages
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: true
+      loop:
+        - "{{ web_pkg }}"
+        - curl
+        - wget
+
+    - name: Deploy custom web page
+      ansible.builtin.copy:
+        content: "Welcome to the ultimate Ansible web server"
+        dest: /var/www/html/index.html
+      notify: Restart Apache
+
+    - name: Ensure service is running
+      ansible.builtin.service:
+        name: "{{ web_svc }}"
+        state: started
+        enabled: true
+
+  handlers:
+    - name: Restart Apache
+      ansible.builtin.service:
+        name: "{{ web_svc }}"
+        state: Restarted

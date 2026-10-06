@@ -1,0 +1,12 @@
+---
+- name: copy files to nodes
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: copy files and contents
+      ansible.builtin.copy:
+        src: ~/ansible-playbooks/info.txt
+        dest: /tmp/info.txt
+        mode: "0644"
+

@@ -1,0 +1,15 @@
+---
+- name: Install multiple tools
+  hosts: servers
+  become: true
+
+  tasks: 
+  - name: Install packages
+    ansible.builtin.apt:
+      name: "{{ item }}"
+      state: present
+
+    loop:
+      - git
+      - curl
+      - wget

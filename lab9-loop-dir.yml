@@ -1,0 +1,16 @@
+---
+- name: Create Multiple Directories
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Ensure directory exists
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+
+      loop:
+        - /opt/dev
+        - /opt/test
+        - /opt/prod 

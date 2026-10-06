@@ -1,0 +1,14 @@
+---
+- name: Install packages using variables
+  hosts: servers
+  become: true
+
+  vars:
+    my_package: tree
+
+  tasks:
+    - name: Install the defined package
+      ansible.builtin.apt:
+        name: "{{ my_package }}"
+        state: present
+        update_cache: true
