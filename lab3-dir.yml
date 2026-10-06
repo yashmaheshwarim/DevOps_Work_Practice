@@ -1,0 +1,16 @@
+---
+- name: Create an empty file
+  hosts: servers
+  become: true
+  tasks:
+    - name: create ansible lab_dir
+      ansible.builtin.file:
+        path: /opt/ansible_lab
+        state: directory
+        mode: '0755'
+
+    - name: Ensure file exists
+      ansible.builtin.file:
+        path: /opt/ansible_lab/test.txt
+        state: touch
+        mode: '0644'
