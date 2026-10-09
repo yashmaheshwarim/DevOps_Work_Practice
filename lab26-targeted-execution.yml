@@ -1,0 +1,17 @@
+---
+- name: Tags Demo
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Install web server
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+      tags: install
+
+    - name: Start web server
+      ansible.builtin.service:
+        name: apache2
+        state: started
+      tags: service

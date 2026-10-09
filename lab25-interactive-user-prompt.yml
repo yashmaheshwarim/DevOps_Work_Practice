@@ -1,0 +1,16 @@
+
+---
+- name: Prompt Demo
+  hosts: servers
+  become: true
+
+  vars_prompt:
+    - name: username
+      prompt: "Enter the new user to create"
+      private: false
+
+  tasks:
+    - name: Create the prompted user
+      ansible.builtin.user:
+        name: "{{ username }}"
+        state: present

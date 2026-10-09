@@ -1,0 +1,16 @@
+---
+- name: Register output
+  hosts: servers
+  become: true
+  
+  tasks:
+    - name: check if /opt/app exists
+      stat:
+        path: /opt/app
+      register: app_dir
+
+    - name: create fallback directory if app is missing
+      file:
+        path: /opt/fallback
+        state: directory
+      when: not app_dir.stat.exists

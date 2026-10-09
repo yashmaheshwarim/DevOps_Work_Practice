@@ -1,0 +1,16 @@
+---
+- name: Complex Conditions
+  hosts: demo
+  become: true
+
+  vars:
+    environment: prod
+
+  tasks:
+    - name: Restart service for prod on Ubuntu
+      service:
+        name: apache2
+        state: restarted
+      when:
+        - ansible_os_family == "Debian"
+        - environment == "prod"

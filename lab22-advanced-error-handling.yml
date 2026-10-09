@@ -1,0 +1,20 @@
+---
+- name: Block Rescue Always
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Attempt risky deployment
+      block:
+        - name: Force a failure
+          ansible.builtin.command: ls /non_existent_directory
+
+      rescue:
+        - name: Run this only if the block fails
+          ansible.builtin.debug:
+            msg: "Deployment failed! Rolling back changes."
+
+      always:
+        - name: Run this no matter what happens
+          ansible.builtin.debug:
+            msg: "Cleaning up temporary files."

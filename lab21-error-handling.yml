@@ -1,0 +1,13 @@
+---
+- name: Ignore Errors Demo
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Run a command that will fail
+      command: /bin/false
+      ignore_errors: true
+
+    - name: This task still runs!
+      debug:
+        msg: "The playbook continued successfully."

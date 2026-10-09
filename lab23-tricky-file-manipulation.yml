@@ -1,0 +1,12 @@
+---
+- name: Lineinfile Demo
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Ensure port 8080 is configured
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^Port '
+        line: 'Port 2222'
+        backup: true

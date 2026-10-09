@@ -1,0 +1,6 @@
+---
+- name: executing a role
+  hosts: servers
+  become: true
+  roles:
+    - webserver_role

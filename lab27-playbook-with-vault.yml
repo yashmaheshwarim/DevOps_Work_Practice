@@ -1,0 +1,10 @@
+---
+- name: Vault executiion demo
+  hosts: servers
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Print the secret
+      debug:
+        msg: "The database password id {{ db_password }}"

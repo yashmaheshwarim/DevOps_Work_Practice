@@ -1,0 +1,14 @@
+---
+- name: Blockinfile Demo
+  hosts: servers
+  become: true
+
+  tasks:
+    - name: Insert custom config block
+      ansible.builtin.blockinfile:
+        path: /tmp/custom.conf
+        create: true
+        block: |
+          # Custom App Config
+          MAX_USERS=100
+          TIMEOUT=30

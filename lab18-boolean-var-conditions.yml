@@ -1,0 +1,12 @@
+---
+- name: Variable condition
+  hosts: servers
+  become: true
+  vars:
+    install_monitoring: true
+  tasks:
+    - name: Install htop if monitoring is enabled
+      apt:
+        name: htop
+        state: present
+      when: install_monitoring | bool

@@ -1,0 +1,13 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for webserver_role
+- name: Install Apache
+  apt:
+    name: apache2
+    state: present
+
+- name: start Apache
+  service:
+    name: apache2
+    state: started
+
